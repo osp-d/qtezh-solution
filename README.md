@@ -1,15 +1,4 @@
 # Claude's Viral Growth Machine
-## Setup
-
-```bash
-pip install aiohttp pandas requests
-
-# Run the scraper
-python scrapers/reddit_scraper.py          # outputs data/reddit_data.csv
-
-# Run enrichment (comments + author history for top posts)
-python scrapers/reddit_enrichment.py       # outputs reddit_comments.csv, reddit_authors.csv
-```
 
 No API keys required. Both scripts use Reddit's public JSON endpoints with a standard User-Agent header.
 
@@ -18,11 +7,69 @@ No API keys required. Both scripts use Reddit's public JSON endpoints with a sta
 **Link for the repository that shows implementation to use in automated machine:**
 https://github.com/osp-d/test-hackathon-pipeline
 
-For the automated pipeline, set two environment variables in GitHub Actions secrets:
+## Setup
 
+### 1. Clone the Repository
+
+git clone https://github.com/osp-d/qtezh-solution.git
+cd your-repo
+
+### 2. Create Virtual Environment
+
+macOS / Linux
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
 ```
-TELEGRAM_BOT_TOKEN=...
-TELEGRAM_CHAT_ID=...
+
+Windows
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+### 3. Install Dependencies
+
+```bash
+pip install --upgrade pip
+pip install aiohttp pandas requests
+```
+
+### 4. Configure Scraper Mode
+
+Set how much historical data to pull using TIME_FILTER:
+macOS / Linux
+
+```bash
+export TIME_FILTER=hour
+```
+
+Windows (PowerShell)
+
+```bash
+$env:TIME_FILTER="hour"
+```
+
+Windows (CMD)
+
+```bash
+set TIME_FILTER=hour
+```
+
+### 5. Run Scraper
+
+```bash
+python scrapers/reddit_scraper.py          # outputs data/reddit_data.csv
+```
+
+### 6. Run Enrichment (Comments + Authors)
+
+After scraping:
+
+```bash
+python scrapers/reddit_enrichment.py       # outputs reddit_comments.csv, reddit_authors.csv
 ```
 
 ---
